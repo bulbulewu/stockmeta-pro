@@ -1,0 +1,6 @@
+{
+  "name": "StockMeta Pro",
+  "description": "AI-Powered Microstock Metadata Generator, SEO Optimizer, and File-Embedding Suite for 26+ Marketplaces.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,19 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Windows binaries (Linux container uses apt-get libimage-exiftool-perl)
+exiftool.exe
+exiftool_files/
+bin/
+*.exe
+*.dll
+*.zip
+*.bat
+*.ps1
+Role

@@ -1,0 +1,239 @@
+{
+  "$comment": "StockMeta Pro - 13 Core Target Marketplaces Configuration. Values must be verified periodically against each marketplace's contributor guidelines.",
+  "platforms": {
+    "adobe_stock": {
+      "id": "adobe_stock",
+      "name": "Adobe Stock",
+      "tier": 1,
+      "category": "Major Microstock",
+      "lastVerified": "2026-03-15",
+      "delimiter": ",",
+      "acceptedFormats": [".jpg", ".jpeg", ".png", ".svg", ".eps", ".ai", ".mp4", ".mov"],
+      "titleLimits": { "minChars": 15, "maxChars": 200, "targetMin": 50, "targetMax": 70, "minWords": 5 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 500 },
+      "keywordLimits": { "minCount": 5, "maxCount": 49, "recommendedMin": 25, "recommendedMax": 49 },
+      "csvHeaders": ["Filename", "Title", "Keywords", "Category", "Releases"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Mark 'Created using generative AI tools' toggle during upload. If realistic people/places, releases or editorial flags are required."
+      },
+      "specialNotes": "First 10 keywords are strictly weighted in Adobe Stock search algorithm. Max 49 keywords."
+    },
+    "shutterstock": {
+      "id": "shutterstock",
+      "name": "Shutterstock",
+      "tier": 1,
+      "category": "Major Microstock",
+      "lastVerified": "2026-03-15",
+      "delimiter": ",",
+      "acceptedFormats": [".jpg", ".jpeg", ".png", ".svg", ".eps", ".ai", ".mp4", ".mov"],
+      "titleLimits": { "minChars": 15, "maxChars": 200, "targetMin": 50, "targetMax": 70, "minWords": 5 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 200, "minWords": 5 },
+      "keywordLimits": { "minCount": 7, "maxCount": 50, "recommendedMin": 25, "recommendedMax": 50 },
+      "csvHeaders": ["Filename", "Description", "Keywords", "Categories", "Editorial", "Mature content", "Illustration"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Shutterstock allows AI content created exclusively through their internal generator, or requires AI illustration disclosure."
+      },
+      "specialNotes": "Uses Description as primary caption (max 200 chars). Min 7 keywords, max 50."
+    },
+    "freepik": {
+      "id": "freepik",
+      "name": "Freepik",
+      "tier": 1,
+      "category": "Major Microstock",
+      "lastVerified": "2026-03-10",
+      "delimiter": ";",
+      "acceptedFormats": [".jpg", ".jpeg", ".png", ".svg", ".eps", ".ai", ".mp4"],
+      "titleLimits": { "minChars": 10, "maxChars": 100, "targetMin": 50, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 250 },
+      "keywordLimits": { "minCount": 5, "maxCount": 50, "recommendedMin": 25, "recommendedMax": 50 },
+      "csvHeaders": ["File name", "Title", "Keywords", "Prompt", "Model"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Strict requirement to include Prompt and Model columns in CSV for AI-generated assets."
+      },
+      "specialNotes": "Strictly requires SEMICOLON (;) delimited CSV! Max title length: 100 characters."
+    },
+    "vecteezy": {
+      "id": "vecteezy",
+      "name": "Vecteezy",
+      "tier": 1,
+      "category": "Vector & Microstock",
+      "lastVerified": "2026-02-28",
+      "delimiter": ",",
+      "acceptedFormats": [".jpg", ".png", ".svg", ".eps", ".ai", ".mp4"],
+      "titleLimits": { "minChars": 10, "maxChars": 200, "targetMin": 50, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 400 },
+      "keywordLimits": { "minCount": 5, "maxCount": 50, "recommendedMin": 25, "recommendedMax": 50 },
+      "csvHeaders": ["Filename", "Title", "Description", "Keywords", "License"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Mark as AI Generated in contributor portal upon upload."
+      },
+      "specialNotes": "Ideal for vectors and stock photos. Default license: Standard."
+    },
+    "getty_istock": {
+      "id": "getty_istock",
+      "name": "Getty Images / iStock",
+      "tier": 1,
+      "category": "Major Microstock",
+      "lastVerified": "2026-02-20",
+      "delimiter": ",",
+      "acceptedFormats": [".jpg", ".jpeg", ".png", ".mp4", ".mov"],
+      "titleLimits": { "minChars": 15, "maxChars": 250, "targetMin": 50, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 500 },
+      "keywordLimits": { "minCount": 5, "maxCount": 50, "recommendedMin": 25, "recommendedMax": 50 },
+      "csvHeaders": ["file name", "created date", "description", "country", "brief code", "title", "keywords"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Getty/iStock generally prohibits third-party unvetted generative AI unless explicitly opted into proprietary programs."
+      },
+      "specialNotes": "Getty/iStock ESP upload format. Controlled vocabulary keywords."
+    },
+    "pond5": {
+      "id": "pond5",
+      "name": "Pond5",
+      "tier": 1,
+      "category": "Video & Media Microstock",
+      "lastVerified": "2026-03-01",
+      "delimiter": ",",
+      "acceptedFormats": [".mp4", ".mov", ".jpg", ".png", ".svg"],
+      "titleLimits": { "minChars": 10, "maxChars": 150, "targetMin": 50, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 500 },
+      "keywordLimits": { "minCount": 5, "maxCount": 50, "recommendedMin": 25, "recommendedMax": 50 },
+      "csvHeaders": ["OriginalFilename", "Title", "Description", "Keywords", "Copyright", "Price"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Must check 'AI Generated Content' box in media edit view."
+      },
+      "specialNotes": "Primary marketplace for video clips and motion graphics."
+    },
+    "alamy": {
+      "id": "alamy",
+      "name": "Alamy",
+      "tier": 1,
+      "category": "Editorial & Commercial",
+      "lastVerified": "2026-03-05",
+      "delimiter": ",",
+      "acceptedFormats": [".jpg", ".jpeg", ".png"],
+      "titleLimits": { "minChars": 15, "maxChars": 255, "targetMin": 50, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 500 },
+      "keywordLimits": { "minCount": 10, "maxCount": 50, "recommendedMin": 25, "recommendedMax": 50 },
+      "csvHeaders": ["File Name", "Caption / Title", "Essential Keywords", "Additional Keywords", "Licensing"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Must declare generative AI and categorize strictly as Illustration/Digital Art."
+      },
+      "specialNotes": "Alamy splits keywords into Essential (first 10) and Additional."
+    },
+    "depositphotos": {
+      "id": "depositphotos",
+      "name": "Depositphotos",
+      "tier": 1,
+      "category": "Major Microstock",
+      "lastVerified": "2026-02-15",
+      "delimiter": ",",
+      "acceptedFormats": [".jpg", ".jpeg", ".png", ".eps", ".ai", ".mp4"],
+      "titleLimits": { "minChars": 10, "maxChars": 150, "targetMin": 50, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 250 },
+      "keywordLimits": { "minCount": 7, "maxCount": 50, "recommendedMin": 25, "recommendedMax": 50 },
+      "csvHeaders": ["File name", "Title", "Description", "Keywords", "Categories"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Check 'Created with AI' checkbox during upload."
+      },
+      "specialNotes": "Accepts standard CSV batch tags. Min 7 keywords."
+    },
+    "123rf": {
+      "id": "123rf",
+      "name": "123RF",
+      "tier": 1,
+      "category": "Major Microstock",
+      "lastVerified": "2026-02-10",
+      "delimiter": ",",
+      "acceptedFormats": [".jpg", ".jpeg", ".eps", ".ai", ".mp4"],
+      "titleLimits": { "minChars": 10, "maxChars": 150, "targetMin": 50, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 250 },
+      "keywordLimits": { "minCount": 7, "maxCount": 50, "recommendedMin": 25, "recommendedMax": 50 },
+      "csvHeaders": ["Filename", "Title", "Keywords", "Categories"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Requires AI-generated content tag and appropriate category."
+      },
+      "specialNotes": "Clean, simple stock taxonomy."
+    },
+    "dreamstime": {
+      "id": "dreamstime",
+      "name": "Dreamstime",
+      "tier": 1,
+      "category": "Major Microstock",
+      "lastVerified": "2026-02-18",
+      "delimiter": ",",
+      "acceptedFormats": [".jpg", ".jpeg", ".png", ".eps", ".ai", ".mp4"],
+      "titleLimits": { "minChars": 10, "maxChars": 150, "targetMin": 50, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 300 },
+      "keywordLimits": { "minCount": 5, "maxCount": 50, "recommendedMin": 25, "recommendedMax": 50 },
+      "csvHeaders": ["Filename", "Title", "Description", "Category 1", "Category 2", "Category 3", "Keywords"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Check 'AI Generated Content' box and provide prompt if required."
+      },
+      "specialNotes": "Supports up to 3 distinct categories."
+    },
+    "motion_array": {
+      "id": "motion_array",
+      "name": "Motion Array",
+      "tier": 1,
+      "category": "Video & Templates",
+      "lastVerified": "2026-03-01",
+      "delimiter": ",",
+      "acceptedFormats": [".mp4", ".mov"],
+      "titleLimits": { "minChars": 10, "maxChars": 100, "targetMin": 40, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 350 },
+      "keywordLimits": { "minCount": 5, "maxCount": 40, "recommendedMin": 20, "recommendedMax": 40 },
+      "csvHeaders": ["Title", "Description", "Tags", "Category", "Software / Version"],
+      "aiDisclosure": {
+        "required": false,
+        "instructions": "Disclose in description if motion graphics or elements were generated using AI."
+      },
+      "specialNotes": "Dedicated platform for video creators and animators."
+    },
+    "storyblocks": {
+      "id": "storyblocks",
+      "name": "Storyblocks",
+      "tier": 1,
+      "category": "Subscription Stock",
+      "lastVerified": "2026-02-25",
+      "delimiter": ",",
+      "acceptedFormats": [".mp4", ".mov", ".jpg", ".png"],
+      "titleLimits": { "minChars": 10, "maxChars": 150, "targetMin": 50, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 400 },
+      "keywordLimits": { "minCount": 5, "maxCount": 50, "recommendedMin": 25, "recommendedMax": 50 },
+      "csvHeaders": ["Filename", "Title", "Description", "Keywords", "Asset Type"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Flag AI-assisted media upon submission."
+      },
+      "specialNotes": "Subscription video, audio, and photo marketplace."
+    },
+    "envato": {
+      "id": "envato",
+      "name": "Envato Elements",
+      "tier": 1,
+      "category": "Creative Marketplace",
+      "lastVerified": "2026-03-12",
+      "delimiter": ",",
+      "acceptedFormats": [".eps", ".svg", ".ai", ".jpg", ".png", ".mp4", ".mov"],
+      "titleLimits": { "minChars": 10, "maxChars": 100, "targetMin": 40, "targetMax": 70 },
+      "descriptionLimits": { "minChars": 20, "maxChars": 500 },
+      "keywordLimits": { "minCount": 5, "maxCount": 30, "recommendedMin": 15, "recommendedMax": 30 },
+      "csvHeaders": ["File Name", "Name", "Description", "Tags", "Category", "Files Included"],
+      "aiDisclosure": {
+        "required": true,
+        "instructions": "Declare AI generation during item upload and in item description."
+      },
+      "specialNotes": "Max 30 tags. High quality commercial items."
+    }
+  }
+}
