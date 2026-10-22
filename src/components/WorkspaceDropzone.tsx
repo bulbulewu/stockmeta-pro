@@ -531,6 +531,23 @@ export const WorkspaceDropzone: React.FC<WorkspaceDropzoneProps> = ({
             </button>
           </div>
 
+          {/* Batch AI Trigger (Brought to left side of Scan Duplicates) */}
+          <button
+            disabled={isAnalyzing || files.length === 0}
+            onClick={() => onRunBatchAnalysis(checkedFileIds.length > 0 ? checkedFileIds : files.map((f) => f.id))}
+            className="flex items-center space-x-1.5 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 disabled:opacity-50 text-white px-3 py-1 rounded-md text-[11px] font-medium shadow-sm transition-all cursor-pointer"
+            title="Run Multi-Provider Vision AI analysis on assets"
+          >
+            <Sparkles className={`w-3.5 h-3.5 ${isAnalyzing ? 'animate-spin' : ''}`} />
+            <span>
+              {isAnalyzing
+                ? `Analyzing (${batchProgress?.completed || 0}/${batchProgress?.total || files.length})...`
+                : checkedFileIds.length > 0
+                ? `Analyze Selected (${checkedFileIds.length})`
+                : `Analyze All (${files.length})`}
+            </span>
+          </button>
+
           {/* Perceptual Hash Duplicate Scan Trigger */}
           <button
             onClick={handleScanDuplicates}
@@ -587,24 +604,8 @@ export const WorkspaceDropzone: React.FC<WorkspaceDropzoneProps> = ({
           )}
         </div>
 
-        {/* Right: Batch AI Trigger and View Switcher */}
+        {/* Right: View Switcher */}
         <div className="flex items-center space-x-3">
-          {/* Analyze Buttons */}
-          <button
-            disabled={isAnalyzing || files.length === 0}
-            onClick={() => onRunBatchAnalysis(checkedFileIds.length > 0 ? checkedFileIds : files.map((f) => f.id))}
-            className="flex items-center space-x-1.5 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 disabled:opacity-50 text-white px-3 py-1.5 rounded-md font-medium shadow-sm transition-all cursor-pointer"
-          >
-            <Sparkles className={`w-3.5 h-3.5 ${isAnalyzing ? 'animate-spin' : ''}`} />
-            <span>
-              {isAnalyzing
-                ? `Analyzing (${batchProgress?.completed || 0}/${batchProgress?.total || files.length})...`
-                : checkedFileIds.length > 0
-                ? `Analyze Selected (${checkedFileIds.length})`
-                : `Analyze All (${files.length})`}
-            </span>
-          </button>
-
           {/* Grid / List Switch */}
           <div className="flex items-center space-x-1 bg-slate-950 p-0.5 rounded-md border border-slate-800">
             <button

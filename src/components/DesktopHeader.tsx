@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, Sparkles, Trash2, ShieldCheck, SlidersHorizontal, BookOpen, Key } from 'lucide-react';
+import { Layers, Trash2, Key } from 'lucide-react';
 import { UserProfile } from '../types/stock';
 
 interface DesktopHeaderProps {
@@ -7,7 +7,7 @@ interface DesktopHeaderProps {
   readyFiles: number;
   version?: string;
   activeProviderLabel?: string;
-  onLoadSamples: () => void;
+  onLoadSamples?: () => void;
   onClearAll: () => void;
   onOpenSettings?: () => void;
   onOpenRiskModal?: () => void;
@@ -30,7 +30,7 @@ interface DesktopHeaderProps {
 export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   totalFiles,
   readyFiles,
-  version = 'Studio v3.36',
+  version = 'Studio v3.37',
   activeProviderLabel,
   onLoadSamples,
   onClearAll,
@@ -102,9 +102,6 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
               {version}
             </span>
-            <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-              🆓 FREE
-            </span>
           </span>
         </div>
       </div>
@@ -151,78 +148,15 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
         </div>
       </div>
 
-      {/* Right: Quick actions */}
+      {/* Right: Quick actions & Settings */}
       <div className="flex items-center space-x-2">
-        {onOpenBulkModal && (
-          <button
-            onClick={onOpenBulkModal}
-            className="flex items-center space-x-1 text-xs text-indigo-300 hover:text-white bg-indigo-950/40 hover:bg-indigo-900/60 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer border border-indigo-800/60"
-            title="Batch find & replace keywords, titles, descriptions, categories"
-          >
-            <SlidersHorizontal className="w-3.5 h-3.5" />
-            <span>Bulk Tools</span>
-          </button>
-        )}
-
-        {onOpenRiskModal && (
-          <button
-            onClick={onOpenRiskModal}
-            className="flex items-center space-x-1 text-xs text-rose-300 hover:text-white bg-rose-950/40 hover:bg-rose-900/60 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer border border-rose-800/60"
-            title="Scan content for copyright, trademark and compliance risks"
-          >
-            <span>🛡️ IP Risk</span>
-          </button>
-        )}
-
-        {onOpenVerificationReport && (
-          <button
-            onClick={onOpenVerificationReport}
-            className="flex items-center space-x-1 text-xs text-emerald-300 hover:text-white bg-emerald-950/40 hover:bg-emerald-900/60 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer border border-emerald-800/60"
-            title="View ExifTool readback verification & difference report"
-          >
-            <span>🔍 Verify</span>
-          </button>
-        )}
-
-        {onOpenTrackerModal && (
-          <button
-            onClick={onOpenTrackerModal}
-            className="flex items-center space-x-1 text-xs text-cyan-300 hover:text-white bg-cyan-950/40 hover:bg-cyan-900/60 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer border border-cyan-800/60"
-            title="Track stock submissions, rejections and earnings"
-          >
-            <span>📊 Submissions</span>
-          </button>
-        )}
-
         {onOpenSettings && (
           <button
             onClick={onOpenSettings}
-            className="flex items-center space-x-1 text-xs text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer border border-slate-700/60"
-            title="Configure marketplace limits & platform rules"
+            className="flex items-center space-x-1.5 text-xs text-slate-200 hover:text-white bg-slate-800/90 hover:bg-slate-700/90 px-3 py-1.5 rounded-md transition-colors cursor-pointer border border-slate-700 shadow-sm font-medium"
+            title="Open Platform Settings, Bulk Tools, IP Risk, Verify, Submissions & Documentation"
           >
             <span>⚙️ Settings</span>
-          </button>
-        )}
-
-        {onOpenReadme && (
-          <button
-            onClick={onOpenReadme}
-            className="flex items-center space-x-1 text-xs text-amber-300 hover:text-white bg-amber-950/40 hover:bg-amber-900/60 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer border border-amber-800/60 shadow-sm"
-            title="Open Full-Screen User Manual & Documentation (Bangla & English)"
-          >
-            <BookOpen className="w-3.5 h-3.5 text-amber-400" />
-            <span>📖 Readme</span>
-          </button>
-        )}
-
-        {onOpenPrivacyNotice && (
-          <button
-            onClick={onOpenPrivacyNotice}
-            className="flex items-center space-x-1 text-xs text-emerald-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer border border-slate-700/60"
-            title="Privacy, local processing guarantee & Google AI terms"
-          >
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Privacy</span>
           </button>
         )}
 
@@ -293,15 +227,6 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             </button>
           </div>
         )}
-
-        <button
-          onClick={onLoadSamples}
-          className="flex items-center space-x-1.5 text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded-md font-medium transition-colors shadow-sm shadow-indigo-600/30 cursor-pointer"
-          title="Load 5 realistic test assets (SVG, JPG, PNG, EPS, MP4)"
-        >
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Load Demo Pack</span>
-        </button>
 
         {totalFiles > 0 && (
           <button

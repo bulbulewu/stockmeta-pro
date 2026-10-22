@@ -526,6 +526,7 @@ export default function App() {
       <DesktopHeader
         totalFiles={files.length}
         readyFiles={files.filter((f) => f.status === 'ready').length}
+        version="Studio v3.37"
         activeProviderLabel={activeProviderLabel}
         currentUser={currentUser}
         onOpenAuth={() => setIsAuthModalOpen(true)}
@@ -537,18 +538,6 @@ export default function App() {
         onZoomOut={handleZoomOut}
         onResetZoom={handleResetZoom}
         onOpenSettings={() => setIsSettingsModalOpen(true)}
-        onOpenReadme={() => setIsReadmeModalOpen(true)}
-        onOpenRiskModal={() => setIsRiskModalOpen(true)}
-        onOpenVerificationReport={() => setIsVerificationModalOpen(true)}
-        onOpenTrackerModal={() => setIsTrackerModalOpen(true)}
-        onOpenBulkModal={() => setIsBulkModalOpen(true)}
-        onOpenPrivacyNotice={() => setIsPrivacyModalOpen(true)}
-        onLoadSamples={() => {
-          const fresh = generateSampleStockFiles();
-          setFiles(fresh);
-          setSelectedFileId(fresh[0]?.id || null);
-          setCheckedFileIds(fresh.map((s) => s.id));
-        }}
         onClearAll={() => {
           setFiles([]);
           setSelectedFileId(null);
@@ -661,6 +650,11 @@ export default function App() {
         isOpen={isSettingsModalOpen}
         onClose={() => setIsSettingsModalOpen(false)}
         onOpenReadme={() => setIsReadmeModalOpen(true)}
+        onOpenBulkModal={() => setIsBulkModalOpen(true)}
+        onOpenRiskModal={() => setIsRiskModalOpen(true)}
+        onOpenVerificationReport={() => setIsVerificationModalOpen(true)}
+        onOpenTrackerModal={() => setIsTrackerModalOpen(true)}
+        onOpenPrivacyNotice={() => setIsPrivacyModalOpen(true)}
       />
 
       <ReadmeModal

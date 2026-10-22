@@ -11,6 +11,7 @@ import {
   FileText,
   Save,
   BookOpen,
+  SlidersHorizontal,
 } from 'lucide-react';
 import rawConfig from '../../platforms.config.json';
 import { MARKETPLACES, buildMarketplaces } from '../config/marketplaces';
@@ -20,6 +21,11 @@ interface PlatformSettingsModalProps {
   onClose: () => void;
   onSaved?: () => void;
   onOpenReadme?: () => void;
+  onOpenBulkModal?: () => void;
+  onOpenRiskModal?: () => void;
+  onOpenVerificationReport?: () => void;
+  onOpenTrackerModal?: () => void;
+  onOpenPrivacyNotice?: () => void;
 }
 
 export const PlatformSettingsModal: React.FC<PlatformSettingsModalProps> = ({
@@ -27,6 +33,11 @@ export const PlatformSettingsModal: React.FC<PlatformSettingsModalProps> = ({
   onClose,
   onSaved,
   onOpenReadme,
+  onOpenBulkModal,
+  onOpenRiskModal,
+  onOpenVerificationReport,
+  onOpenTrackerModal,
+  onOpenPrivacyNotice,
 }) => {
   if (!isOpen) return null;
 
@@ -106,21 +117,73 @@ export const PlatformSettingsModal: React.FC<PlatformSettingsModalProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1.5 flex-wrap justify-end gap-y-1">
+            {onOpenBulkModal && (
+              <button
+                onClick={() => { onClose(); onOpenBulkModal(); }}
+                className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-indigo-950/60 text-indigo-300 border border-indigo-800/80 hover:bg-indigo-900/80 font-medium text-xs transition-colors cursor-pointer"
+                title="Batch find & replace keywords, titles, descriptions, categories"
+              >
+                <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Bulk Tools</span>
+              </button>
+            )}
+
+            {onOpenRiskModal && (
+              <button
+                onClick={() => { onClose(); onOpenRiskModal(); }}
+                className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-rose-950/60 text-rose-300 border border-rose-800/80 hover:bg-rose-900/80 font-medium text-xs transition-colors cursor-pointer"
+                title="Scan content for copyright, trademark and compliance risks"
+              >
+                <span>🛡️ IP Risk</span>
+              </button>
+            )}
+
+            {onOpenVerificationReport && (
+              <button
+                onClick={() => { onClose(); onOpenVerificationReport(); }}
+                className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-emerald-950/60 text-emerald-300 border border-emerald-800/80 hover:bg-emerald-900/80 font-medium text-xs transition-colors cursor-pointer"
+                title="View ExifTool readback verification & difference report"
+              >
+                <span>🔍 Verify</span>
+              </button>
+            )}
+
+            {onOpenTrackerModal && (
+              <button
+                onClick={() => { onClose(); onOpenTrackerModal(); }}
+                className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-cyan-950/60 text-cyan-300 border border-cyan-800/80 hover:bg-cyan-900/80 font-medium text-xs transition-colors cursor-pointer"
+                title="Track stock submissions, rejections and earnings"
+              >
+                <span>📊 Submissions</span>
+              </button>
+            )}
+
+            {onOpenPrivacyNotice && (
+              <button
+                onClick={() => { onClose(); onOpenPrivacyNotice(); }}
+                className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 font-medium text-xs transition-colors cursor-pointer"
+                title="Privacy, local processing guarantee & Google AI terms"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Privacy</span>
+              </button>
+            )}
+
             {onOpenReadme && (
               <button
-                onClick={onOpenReadme}
+                onClick={() => { onClose(); onOpenReadme(); }}
                 className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 font-semibold text-xs transition-colors cursor-pointer shadow-sm"
                 title="Open Full-Screen User Manual & Readme (Bangla & English)"
               >
                 <BookOpen className="w-4 h-4 text-amber-400" />
-                <span>📖 Readme / ব্যবহার নির্দেশিকা</span>
+                <span>📖 Readme</span>
               </button>
             )}
 
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
+              className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer ml-1"
             >
               <X className="w-4 h-4" />
             </button>
@@ -129,21 +192,80 @@ export const PlatformSettingsModal: React.FC<PlatformSettingsModalProps> = ({
 
         {/* Content Body: Left Platform List + Right Form Fields */}
         <div className="flex-1 flex overflow-hidden">
-          {/* Left: Platform Tabs */}
-          <div className="w-60 border-r border-slate-800 bg-slate-950/50 p-2 overflow-y-auto custom-scrollbar space-y-1">
-            {onOpenReadme && (
+          {/* Left: Platform Tabs & Quick Tools */}
+          <div className="w-64 border-r border-slate-800 bg-slate-950/50 p-2 overflow-y-auto custom-scrollbar space-y-1">
+            <div className="text-[10px] uppercase font-bold text-slate-400 px-2 py-1 tracking-wider">
+              Studio Tools
+            </div>
+
+            {onOpenBulkModal && (
               <button
-                onClick={onOpenReadme}
-                className="w-full text-left px-3 py-2.5 rounded-lg text-xs font-bold transition-all flex items-center space-x-2 bg-gradient-to-r from-amber-500/20 to-indigo-500/20 text-amber-300 border border-amber-500/40 hover:border-amber-400 mb-2 cursor-pointer shadow-sm"
-                title="Open Complete Software Readme & User Manual (Bangla & English)"
+                onClick={() => { onClose(); onOpenBulkModal(); }}
+                className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center space-x-2 text-indigo-300 bg-indigo-950/30 hover:bg-indigo-900/50 border border-indigo-800/40 cursor-pointer"
+                title="Batch find & replace keywords, titles, descriptions, categories"
               >
-                <BookOpen className="w-4 h-4 text-amber-400 shrink-0" />
-                <span className="truncate">📖 Readme Manual (EN/বাংলা)</span>
+                <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+                <span className="truncate">Bulk Metadata Tools</span>
               </button>
             )}
 
-            <div className="text-[10px] uppercase font-bold text-slate-500 px-2 py-1 tracking-wider">
-              13 Target Agencies
+            {onOpenRiskModal && (
+              <button
+                onClick={() => { onClose(); onOpenRiskModal(); }}
+                className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center space-x-2 text-rose-300 bg-rose-950/30 hover:bg-rose-900/50 border border-rose-800/40 cursor-pointer"
+                title="Scan content for copyright, trademark and compliance risks"
+              >
+                <span className="text-xs shrink-0">🛡️</span>
+                <span className="truncate">IP Risk & Compliance</span>
+              </button>
+            )}
+
+            {onOpenVerificationReport && (
+              <button
+                onClick={() => { onClose(); onOpenVerificationReport(); }}
+                className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center space-x-2 text-emerald-300 bg-emerald-950/30 hover:bg-emerald-900/50 border border-emerald-800/40 cursor-pointer"
+                title="View ExifTool readback verification & difference report"
+              >
+                <span className="text-xs shrink-0">🔍</span>
+                <span className="truncate">ExifTool Verification</span>
+              </button>
+            )}
+
+            {onOpenTrackerModal && (
+              <button
+                onClick={() => { onClose(); onOpenTrackerModal(); }}
+                className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center space-x-2 text-cyan-300 bg-cyan-950/30 hover:bg-cyan-900/50 border border-cyan-800/40 cursor-pointer"
+                title="Track stock submissions, rejections and earnings"
+              >
+                <span className="text-xs shrink-0">📊</span>
+                <span className="truncate">Submissions Tracker</span>
+              </button>
+            )}
+
+            {onOpenPrivacyNotice && (
+              <button
+                onClick={() => { onClose(); onOpenPrivacyNotice(); }}
+                className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center space-x-2 text-slate-300 bg-slate-900/60 hover:bg-slate-800 border border-slate-700/60 cursor-pointer"
+                title="Privacy, local processing guarantee & Google AI terms"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span className="truncate">Privacy & Security</span>
+              </button>
+            )}
+
+            {onOpenReadme && (
+              <button
+                onClick={() => { onClose(); onOpenReadme(); }}
+                className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center space-x-2 bg-amber-500/10 text-amber-300 border border-amber-500/30 hover:bg-amber-500/20 cursor-pointer shadow-sm"
+                title="Open Complete Software Readme & User Manual (Bangla & English)"
+              >
+                <BookOpen className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span className="truncate">Readme (EN/বাংলা)</span>
+              </button>
+            )}
+
+            <div className="pt-2 text-[10px] uppercase font-bold text-slate-500 px-2 py-1 tracking-wider border-t border-slate-800">
+              Agency Rules ({Object.keys(platformsData).length})
             </div>
             {Object.keys(platformsData).map((key) => {
               const p = platformsData[key];
