@@ -63,10 +63,86 @@ export default function App() {
     try { localStorage.setItem('stockmeta_app_zoom', '0.88'); } catch {}
   };
 
-  // Fetch current user and auth settings on load
+  // Studio Visual Theme synchronized with Media Toolkit Pro
+  const [activeTheme, setActiveTheme] = useState<string>(() => {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const t = urlParams.get('theme');
+      if (t && ['dark_studio', 'obsidian_oled', 'cyber_neon', 'titanium_light'].includes(t)) {
+        localStorage.setItem('stockmeta_theme', t);
+        localStorage.setItem('mtk_theme', t);
+        return t;
+      }
+      return localStorage.getItem('stockmeta_theme') || localStorage.getItem('mtk_theme') || 'dark_studio';
+    } catch {
+      return 'dark_studio';
+    }
+  });
+
+  const handleChangeTheme = (theme: string) => {
+    setActiveTheme(theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    try {
+      localStorage.setItem('stockmeta_theme', theme);
+      localStorage.setItem('mtk_theme', theme);
+    } catch {}
+    fetch('/api/user/theme', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ theme }),
+    }).catch(() => {});
+  };
+
   useEffect(() => {
-    const fetchMe = async () => {
+    document.documentElement.setAttribute('data-theme', activeTheme);
+  }, [activeTheme]);
+
+  useEffect(() => {
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'mtk_theme' || e.key === 'stockmeta_theme') {
+        const val = e.newValue;
+        if (val && ['dark_studio', 'obsidian_oled', 'cyber_neon', 'titanium_light'].includes(val)) {
+          setActiveTheme(val);
+        }
+      }
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
+
+  // Fetch current user, SSO login, and auth settings on load
+  useEffect(() => {
+    const fetchMeAndSso = async () => {
       try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const ssoUser = urlParams.get('sso_user');
+        const ssoToken = urlParams.get('sso_token');
+        const urlTheme = urlParams.get('theme');
+
+        if (urlTheme && ['dark_studio', 'obsidian_oled', 'cyber_neon', 'titanium_light'].includes(urlTheme)) {
+          handleChangeTheme(urlTheme);
+        }
+
+        // Handle SSO login from Media Toolkit Pro
+        if (ssoUser) {
+          const ssoRes = await fetch('/api/auth/sso-login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sso_user: ssoUser, sso_token: ssoToken || '' }),
+          });
+          if (ssoRes.ok) {
+            const ssoData = await ssoRes.json();
+            if (ssoData.user && ssoData.token) {
+              localStorage.setItem('stockmeta_auth_token', ssoData.token);
+              setCurrentUser(ssoData.user);
+              setAuthToken(ssoData.token);
+              const cleanUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+              window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+              return;
+            }
+          }
+        }
+
         const token = localStorage.getItem('stockmeta_auth_token') || '';
         const res = await fetch('/api/auth/me', {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -89,7 +165,7 @@ export default function App() {
         console.error('Auth verification error:', err);
       }
     };
-    fetchMe();
+    fetchMeAndSso();
   }, []);
 
   const handleLogout = async () => {
@@ -526,9 +602,11 @@ export default function App() {
       <DesktopHeader
         totalFiles={files.length}
         readyFiles={files.filter((f) => f.status === 'ready').length}
-        version="Studio v3.37"
+        version="Studio v3.38"
         activeProviderLabel={activeProviderLabel}
         currentUser={currentUser}
+        activeTheme={activeTheme}
+        onChangeTheme={handleChangeTheme}
         onOpenAuth={() => setIsAuthModalOpen(true)}
         onOpenAdmin={() => setIsAdminModalOpen(true)}
         onOpenActivateKey={() => setIsActivateKeyModalOpen(true)}

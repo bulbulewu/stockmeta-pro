@@ -25,6 +25,8 @@ interface DesktopHeaderProps {
   onZoomIn?: () => void;
   onZoomOut?: () => void;
   onResetZoom?: () => void;
+  activeTheme?: string;
+  onChangeTheme?: (theme: string) => void;
 }
 
 export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
@@ -50,6 +52,8 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   onZoomIn,
   onZoomOut,
   onResetZoom,
+  activeTheme = 'dark_studio',
+  onChangeTheme,
 }) => {
   const toggleFullscreen = () => {
     try {
@@ -150,15 +154,60 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
 
       {/* Right: Quick actions & Settings */}
       <div className="flex items-center space-x-2">
-        {/* Return to Media Toolkit Pro Button */}
+        {/* Return to Media Toolkit Pro Button (Synchronized with Active Theme & SSO) */}
         <a
-          href="https://midea-upscaler-pro.onrender.com/"
+          href={`https://midea-upscaler-pro.onrender.com/?theme=${activeTheme}${currentUser ? `&sso_user=${encodeURIComponent(currentUser.email || currentUser.username)}&sso_token=sso` : ''}`}
           className="flex items-center space-x-1.5 text-xs text-indigo-300 hover:text-white bg-indigo-950/70 hover:bg-indigo-900/90 px-3 py-1.5 rounded-md transition-colors cursor-pointer border border-indigo-500/40 shadow-sm font-semibold select-none"
           title="Return to Media Toolkit Pro — 4K Video, Image Upscaler & Microstock Suite"
         >
           <span>🎬</span>
           <span>Media Toolkit Pro</span>
         </a>
+
+        {/* Unified Theme Switcher Dropdown (Synchronized with Media Toolkit Pro) */}
+        <div className="relative group">
+          <button
+            className="flex items-center space-x-1.5 text-xs text-slate-200 hover:text-white bg-slate-800/90 hover:bg-slate-700/90 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer border border-slate-700 shadow-sm font-medium"
+            title="Switch Studio Theme (Synchronized with Media Toolkit Pro)"
+          >
+            <span>🎨</span>
+            <span className="capitalize">{activeTheme ? activeTheme.replace('_', ' ') : 'Dark Studio'}</span>
+          </button>
+          <div className="absolute right-0 top-full mt-1 w-40 bg-slate-900 border border-slate-800 rounded-lg shadow-2xl py-1 hidden group-hover:block z-50">
+            <button
+              type="button"
+              onClick={() => onChangeTheme && onChangeTheme('dark_studio')}
+              className={`w-full text-left px-3 py-1.5 text-xs flex items-center space-x-2 hover:bg-slate-800 transition-colors ${activeTheme === 'dark_studio' ? 'text-indigo-400 font-semibold' : 'text-slate-300'}`}
+            >
+              <span>🌙</span>
+              <span>Dark Studio</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onChangeTheme && onChangeTheme('obsidian_oled')}
+              className={`w-full text-left px-3 py-1.5 text-xs flex items-center space-x-2 hover:bg-slate-800 transition-colors ${activeTheme === 'obsidian_oled' ? 'text-indigo-400 font-semibold' : 'text-slate-300'}`}
+            >
+              <span>🖤</span>
+              <span>Obsidian OLED</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onChangeTheme && onChangeTheme('cyber_neon')}
+              className={`w-full text-left px-3 py-1.5 text-xs flex items-center space-x-2 hover:bg-slate-800 transition-colors ${activeTheme === 'cyber_neon' ? 'text-indigo-400 font-semibold' : 'text-slate-300'}`}
+            >
+              <span>⚡</span>
+              <span>Cyber Neon</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onChangeTheme && onChangeTheme('titanium_light')}
+              className={`w-full text-left px-3 py-1.5 text-xs flex items-center space-x-2 hover:bg-slate-800 transition-colors ${activeTheme === 'titanium_light' ? 'text-indigo-400 font-semibold' : 'text-slate-300'}`}
+            >
+              <span>☀️</span>
+              <span>Titanium Light</span>
+            </button>
+          </div>
+        </div>
 
         {onOpenSettings && (
           <button

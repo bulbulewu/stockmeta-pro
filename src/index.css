@@ -61,3 +61,76 @@ html, body {
   background-color: #6366f1;
   color: #ffffff;
 }
+
+/* ==========================================================================
+   UNIFIED THEMES — Synchronized with Media Toolkit Pro V3
+   ========================================================================== */
+[data-theme="dark_studio"] {
+  color-scheme: dark;
+}
+
+/* Obsidian OLED (Pure Black) */
+[data-theme="obsidian_oled"],
+[data-theme="obsidian_oled"] body,
+[data-theme="obsidian_oled"] #root {
+  background-color: #000000 !important;
+  color-scheme: dark;
+}
+[data-theme="obsidian_oled"] header,
+[data-theme="obsidian_oled"] .bg-slate-900,
+[data-theme="obsidian_oled"] .bg-slate-950 {
+  background-color: #050507 !important;
+}
+[data-theme="obsidian_oled"] .border-slate-800,
+[data-theme="obsidian_oled"] .border-slate-700 {
+  border-color: #1a1a22 !important;
+}
+
+/* Cyber Neon (Deep Purple & Electric Blue) */
+[data-theme="cyber_neon"],
+[data-theme="cyber_neon"] body,
+[data-theme="cyber_neon"] #root {
+  background-color: #080614 !important;
+  color-scheme: dark;
+}
+[data-theme="cyber_neon"] header,
+[data-theme="cyber_neon"] .bg-slate-900,
+[data-theme="cyber_neon"] .bg-slate-950 {
+  background-color: #0c081e !important;
+}
+[data-theme="cyber_neon"] .border-slate-800,
+[data-theme="cyber_neon"] .border-slate-700 {
+  border-color: #2f1e63 !important;
+}
+
+/* Titanium Light (Clean Crisp Light Interface) */
+[data-theme="titanium_light"],
+[data-theme="titanium_light"] body,
+[data-theme="titanium_light"] #root {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  color-scheme: light;
+}
+[data-theme="titanium_light"] header,
+[data-theme="titanium_light"] .bg-slate-900 {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+[data-theme="titanium_light"] .bg-slate-950 {
+  background-color: #e2e8f0 !important;
+  border-color: #cbd5e1 !important;
+}
+[data-theme="titanium_light"] .border-slate-800,
+[data-theme="titanium_light"] .border-slate-700 {
+  border-color: #cbd5e1 !important;
+}
+[data-theme="titanium_light"] .text-white {
+  color: #0f172a !important;
+}
+[data-theme="titanium_light"] .text-slate-200,
+[data-theme="titanium_light"] .text-slate-300 {
+  color: #1e293b !important;
+}
+[data-theme="titanium_light"] .text-slate-400 {
+  color: #475569 !important;
+}

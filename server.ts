@@ -939,6 +939,23 @@ app.post('/api/auth/logout', (req, res) => {
   res.json({ success: true });
 });
 
+// Single Sign-On from Media Toolkit Pro
+app.post('/api/auth/sso-login', (req, res) => {
+  try {
+    const { sso_user, sso_token } = req.body;
+    const result = authManager.ssoLogin(sso_user, sso_token);
+    res.json({ success: true, ...result });
+  } catch (err: any) {
+    res.status(400).json({ error: err.message || 'SSO authentication failed' });
+  }
+});
+
+// Cross-Site User Theme Persistence Endpoint
+app.post('/api/user/theme', (req, res) => {
+  const { theme } = req.body;
+  res.json({ success: true, theme });
+});
+
 // User License Key Activation Endpoint
 app.post('/api/auth/activate-key', (req, res) => {
   const user = getAuthenticatedUser(req);
