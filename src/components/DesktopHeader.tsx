@@ -150,6 +150,16 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({
 
       {/* Right: Quick actions & Settings */}
       <div className="flex items-center space-x-2">
+        {/* Return to Media Toolkit Pro Button */}
+        <a
+          href="https://midea-upscaler-pro.onrender.com/"
+          className="flex items-center space-x-1.5 text-xs text-indigo-300 hover:text-white bg-indigo-950/70 hover:bg-indigo-900/90 px-3 py-1.5 rounded-md transition-colors cursor-pointer border border-indigo-500/40 shadow-sm font-semibold select-none"
+          title="Return to Media Toolkit Pro — 4K Video, Image Upscaler & Microstock Suite"
+        >
+          <span>🎬</span>
+          <span>Media Toolkit Pro</span>
+        </a>
+
         {onOpenSettings && (
           <button
             onClick={onOpenSettings}
